@@ -55,6 +55,27 @@ R3. [Temporal Dynamics](./paper/P5 Collaborative Filtering with Temporal Dynamic
 U <- length(unique(data$userId))
 I <- length(unique(data$movieId))
 source("../lib/Matrix_Factorization.R")
+
+
+## Implementation of A1
+A1_output <- gradesc(f = 10, lambda = 0.1,lrate = 0.01, max.iter = 100, stopping.deriv = 0.01,
+                   data = data, train = data_train, test = data_test)
+
+save(result, file = "../output/A1_output.RData")
+
+```
+
+
+```{r}
+
+source("../lib/pmf.R")
+
+## Implementation of A2 
+A2_output <- gradesc(f = 10, lambda = 0.1,lrate = 0.01, max.iter = 100, stopping.deriv = 0.01,
+                   data = data, train = data_train, test = data_test)
+
+save(result, file = "../output/A2_output.RData")
+
 ```
 
 
