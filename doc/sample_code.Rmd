@@ -61,7 +61,7 @@ source("../lib/Matrix_Factorization.R")
 A1_output <- gradesc(f = 10, lambda = 0.1,lrate = 0.01, max.iter = 100, stopping.deriv = 0.01,
                    data = data, train = data_train, test = data_test)
 
-save(result, file = "../output/A1_output.RData")
+save(A1_output, file = "../output/A1_output.RData")
 
 ```
 
@@ -99,7 +99,7 @@ run_time <- system.time(for(i in 1:nrow(f_l)){
   
 })
 
-save(result_summary, file = "../output/rmse.Rdata")
+save(result_summary, file = "../output/rmse_test.Rdata")
 ```
 
 ```{r}

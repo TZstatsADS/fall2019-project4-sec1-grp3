@@ -39,6 +39,16 @@ gradesc <- function(f = 10,
   test_RMSE <- c()
   
   
+  # Math behind work 
+  #P_u = P_u + lrate (1/2(2 I_ui(r_ui-T(q_i)*P_u)(P_u))+constant* 2P_u) # Implmentation  of A2
+  
+  
+  #P_u = P_u + lrate ((r_ui-T(q_i)*P_u)*P_u)- lambda P_u) - Implementation of A1
+  
+  
+  
+  
+  
   for(l in 1:max.iter){
     sample_idx <- sample(1:nrow(train), nrow(train))
     #loop through each training case and perform update
