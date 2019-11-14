@@ -33,7 +33,10 @@ gradesc <- function(f = 10,
   colnames(q) <- levels(as.factor(data$movieId))
   
   #Make matrix of u x i fill in 1 if user u did rate movie i otherwise put 0
-  I_ui
+  I_ui = matrix(0, U, I)
+  for (s in train){
+   I_ui[train[s,1],train[s,2]] = 1
+  }
   
   train_RMSE <- c()
   test_RMSE <- c()
@@ -50,42 +53,55 @@ gradesc <- function(f = 10,
   
   
   for(l in 1:max.iter){
+    #random order of numbers from 1 to train rows without replacement, with number of trains output
     sample_idx <- sample(1:nrow(train), nrow(train))
     #loop through each training case and perform update
     
 
-    for(all movies m1){
+    for (movie in 1:I){
       
-      i <- as.character(train[s,2])
+      i <- as.character(train[movie,2])
       
-      for(all users u1){
+      for (user in 1:U){
+        
         #Get the users, movie ids, and the ratings
-        u <- as.character(train[s,1])
-        r_ui <- train[s,3]
+        u <- as.character(train[user,1])
+        
+        #this is wrong, How do you find the right rating for user movie pair?
+        r_ui <- train[(movie,user),3]
         
         # rating - Transpose column i of q maxtrix multipled by column u of p
         # rating(1x1) - the multiplication of a user and some movie (should be 1xf * fx1 matrix results in 1x1 matrix)
         # e_ui = 1x1
-        
         e_ui <- r_ui - t(q[,i]) %*% p[,u]
         
-        # Ans_Ie disappears when looping, how are we supposed to use this data?
-        Ans_Ie =I_ui[u,m] * e_ui^2 
-
-
+        #error from rating times the user column - lambda  times movie column
+        #gives gradient  
+        # number* fx1 - lamba * fx1
+        #grad_q = fx1
+        # We are doing this grad_q and grad_p cause this is stochastic gradient decent
+        
+        #  t(q[,i]) %*% q[,i] is that supposed to be 2q[,i] or vice versa?
+        # sig we can just test values 0.01 , .1, 1, or 10 (the sigs can be different per equation)
+        
+        sig=0.1
+        grad_q <- 2*I_ui[user,movie] * e_ui %*% p[,u] + sig * 2*q[,i]
+        
+        if (all(abs(grad_q) > stopping.deriv, na.rm = T)){
+          q[,i] <- q[,i] + 0.5*lrate * grad_q
+        }
+        grad_p <- 2*I_ui[user,movie] * e_ui %*% q[,i] + sig * 2*p[,u]
+        
+        if (all(abs(grad_p) > stopping.deriv, na.rm = T)){
+          p[,u] <- p[,u] + 0.5*lrate * grad_p
+        }
+        
       }
-       
+      
+      
+      
+      
     }
-    
-    #What is the first standard deviation using
-    std_q = stdev(, na.rm, unbiased)/2*stdev(q, na.rm, unbiased)
-    std_p = stdev(, na.rm, unbiased)/2*stdev(q, na.rm, unbiased)
-    
-    #WHAT IS ||q_i||^2? 
-    #we are using sum(q^2) for now since we saw examples online that use that.
-    E = Ans_Ie + std_q*sum(q^2)+ std_p*sum(p^2)
-    
-    
     #print the values of training and testing RMSE
     if (l %% 10 == 0){
       cat("epoch:", l, "\t")
