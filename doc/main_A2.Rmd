@@ -1,0 +1,48 @@
+---
+title: "Implement_A2"
+author: "Luyue Chen lc3363"
+date: "11/15/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+data <- read.csv("../data/ml-latest-small/ratings.csv")
+set.seed(0)
+test_idx <- sample(1:nrow(data), round(nrow(data)/5, 0))
+train_idx <- setdiff(1:nrow(data), test_idx)
+dat_train <- data[train_idx,]
+dat_test <- data[test_idx,]
+```
+
+```{r}
+source("../lib/A2_PMF.R")
+source("../lib/CV_A2.R")
+```
+
+```{r}
+f_list <- c(10, 20)
+lp_list <- c(0.1,0.2)
+lq_list <- c(0.1,0.2) 
+params <- expand.grid(f_list, lp_list, lq_list)
+U <- length(unique(data$userId))
+I <- length(unique(data$movieId))
+```
+
+```{r}
+result_summary <- matrix(NA, nrow=nrow(params), ncol=4) 
+run_time <- system.time(for(i in 1:nrow(params)){
+    par <- paste("f = ", params[i,1], ", lambda_p = ", params[i,2],
+                 ", lambda_q = ", params[i,3])
+    cat(par, "\n")
+    current_result <- cv.function(dat_train = dat_train, K = 5, f = params[i,1], lambda_p = params[i,2], lambda_q = params[i,3], epochs=20, lrate=0.01)
+    result_summary[i,] <- unlist(current_result) 
+    print(result_summary)
+})
+```
