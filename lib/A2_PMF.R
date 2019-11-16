@@ -14,6 +14,9 @@ gradesc <- function(f = 10,
   U <- length(unique(data$userId))
   I <- length(unique(data$movieId))
   
+  train_RMSE <- c()
+  test_RMSE <- c()
+  
   set.seed(0)
   #random assign value to matrix p and q
   p <- matrix(runif(f*U, -1, 1), ncol = U) 
