@@ -31,7 +31,7 @@ gradesc <- function(f = 10,
     RMSE <- matrix(0, nrow=epochs, ncol=2)
     est_rating <- vector(mode="list")
     
-    for (i in 1:nrow(dat_train)){
+    for (i in 1:nrow(train)){
       user <- as.character(train[i,1])
       movie <- as.character(train[i,2])
       error <- train[i,3]-t(p[,user])%*%q[,movie]
