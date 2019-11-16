@@ -42,8 +42,8 @@ gradesc <- function(f = 10,
     for(i in 1:U){
       grad_p[,as.character(i)] <- grad_p[,as.character(i)]-lambda_p*p[,as.character(i)]
     }
-    for(i in 1:I){
-      grad_q[,as.character(i)] <- grad_q[,as.character(i)]-lambda_q*q[,as.character(i)]
+    for(i in 1:levels(as.factor(data$movieId))){
+      grad_q[,i] <- grad_q[,i]-lambda_q*q[,i]
     }
     
     p <- p + lrate*grad_p
