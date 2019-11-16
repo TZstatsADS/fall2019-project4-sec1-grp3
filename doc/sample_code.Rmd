@@ -132,6 +132,16 @@ save(result, file = "../output/mat_fac.RData")
 load(file = "../output/mat_fac.RData")
 
 pred_rating <- t(result$q) %*% result$p
+
+##### Postprocessing #####
+source("../lib/P3.R")
+
+# Make X
+X <- X_mat(q=result$q) 
+#SVD with kernel ridge regression
+pred_rating <- svd_krr(n=nrow(X), lamb=.5, X, pred_rating) 
+#####
+
 #define a function to extract the corresponding predictedrating for the test set.
 extract_pred_rating <- function(test_set, pred){
   pred_rating <- pred[as.character(test_set[2]), as.character(test_set[1])]
