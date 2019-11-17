@@ -34,8 +34,8 @@ params <- expand.grid(f_list, lp_list, lq_list)
 ```
 
 ```{r,message=FALSE,warning=FALSE}
-epochs=20
-lrate=0.01
+epochs=200
+lrate=0.001
 result_summary <- array(NA, dim = c(nrow(params), epochs/10, 4))  
 run_time <- system.time(for(i in 1:nrow(params)){
     par <- paste("f = ", params[i,1], ", lambda_p = ", params[i,2],
@@ -46,19 +46,6 @@ run_time <- system.time(for(i in 1:nrow(params)){
     print(result_summary)
 })
 save(result_summary, file = "../output/rmse_A2.Rdata")
-```
-
-```{r}
-# try
-epochs = 20
-lrate = 0.01
-i = 1
-par <- paste("f = ", params[i,1], ", lambda_p = ", params[i,2],
-                 ", lambda_q = ", params[i,3])
-    cat(par, "\n")
-    current_result <- cv.function(data=data,dat_train = dat_train, K = 5, f = params[i,1], lambda_p = params[i,2], lambda_q = params[i,3], epochs=epochs, lrate=lrate)
-    result_summary[,,i] <- matrix(unlist(current_result), ncol = epochs/10, byrow = T) 
-    print(result_summary)
 ```
 
 ```{r}
