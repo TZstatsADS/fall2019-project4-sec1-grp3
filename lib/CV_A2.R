@@ -1,4 +1,4 @@
-cv.function <- function(data,dat_train, K,epochs,lrate, f, lambda_p, lambda_q){
+cv.function2 <- function(data,dat_train, K,epochs,lrate, f, lambda_p, lambda_q){
   ### Input:
   ### - train data frame
   ### - K: a number stands for K-fold CV
@@ -17,7 +17,7 @@ cv.function <- function(data,dat_train, K,epochs,lrate, f, lambda_p, lambda_q){
     
     result <- gradesc(f = f, lambda_p =lambda_p,lambda_q=lambda_q,
                       lrate = lrate, epochs = epochs, stopping.deriv = 0.01, data=data,
-                      dat_train = dat_train, train = train.data, test = test.data)
+                      train = train.data, test = test.data)
     
     train_rmse[i,] <-  result$train_RMSE
     test_rmse[i,] <-   result$test_RMSE
