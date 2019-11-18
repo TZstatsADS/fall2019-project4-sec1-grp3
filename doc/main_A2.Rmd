@@ -58,6 +58,6 @@ ggsave("../output/A2_AB.png")
 ```
 
 ```{r, eval= FALSE}
-result_A2 <- gradesc2(f = 8, lambda_p = 0.1, lambda_q=0.1, lrate = 0.001, epochs = 200,data = data, train = dat_train, test = dat_test)
+result_A2 <- gradesc2(f = 8, lambda_p = 0.1, lambda_q=0.1, lrate = 0.001, epochs = 240,data = data, train = dat_train, test = dat_test)
 save(result, file = "../output/mat_fac_A2.RData")
 ```
