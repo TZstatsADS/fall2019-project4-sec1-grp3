@@ -6,9 +6,9 @@ RMSE <- function(rating, est_rating){
   return(sqrt(mean(apply(rating, 1, sqr_err))))  
 }
 
-gradesc <- function(f = 10, 
-                    lrate = 0.01, lambda_p, lambda_q, epochs, stopping.deriv = 0.01,data=data,
-                    dat_train, train, test){
+gradesc2 <- function(f = 10, 
+                    lrate = 0.01, lambda_p, lambda_q, epochs, data=data,
+                    train, test){
   
   U <- length(unique(data$userId))
   I <- length(unique(data$movieId))
