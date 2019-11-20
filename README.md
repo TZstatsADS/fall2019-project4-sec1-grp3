@@ -16,9 +16,9 @@ Term: Fall 2019
 	
 	+ Cho, Sung In sc4393@columbia.edu
 	
-	+ Li, Xiaotong xl2788@columbia.edu
-	
 	+ Kravitz, Adam ajk2254@columbia.edu
+	
+	+ Li, Xiaotong xl2788@columbia.edu
 	
 + Project summary: In our project, we implemented algorithm A1, A2, P3, and used cross validation method to do parameter selection in A1 and A2. Finally, by combining A1 + P3 and A2 + P3, we further improve the performance on test dataset, and compare each algorithm w.r.t the RMSE, running time.
 
