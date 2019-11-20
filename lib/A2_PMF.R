@@ -7,7 +7,7 @@ RMSE <- function(rating, est_rating){
 }
 
 gradesc2 <- function(f = 10, 
-                    lrate = 0.01, lambda_p, lambda_q, epochs, data=data,
+                    lrate = 0.01, lambda_p, lambda_q, epochs, print_every, data=data,
                     train, test){
   
   U <- length(unique(data$userId))
@@ -15,6 +15,7 @@ gradesc2 <- function(f = 10,
   
   train_RMSE <- c()
   test_RMSE <- c()
+  epoch_dur <- c()
   
   set.seed(0)
   #random assign value to matrix p and q
@@ -23,8 +24,13 @@ gradesc2 <- function(f = 10,
   
   q <- matrix(runif(f*I, -1, 1), ncol = I)
   colnames(q) <- levels(as.factor(data$movieId))
+  t0 = Sys.time()
   
   for(l in 1:epochs){
+      
+    if (l%%print_every == 1){
+      t1 = Sys.time()
+    }
     
     grad_p <- matrix(0, ncol=U, nrow=f)
     colnames(grad_p) <- as.character(1:U)
@@ -34,9 +40,11 @@ gradesc2 <- function(f = 10,
     for (i in 1:nrow(train)){
       user <- as.character(train[i,1])
       movie <- as.character(train[i,2])
-      error <- as.numeric(train[i,3])-t(p[,user])%*%q[,movie]
+      err <- as.numeric(train[i,3])- t(p[,user]) %*% q[,movie]
+      error <- rep(err, f)
       grad_p[,user] <- grad_p[,user]+error*q[,movie]
       grad_q[,movie] <- grad_q[,movie]+error*p[,user]
+      
     }
     
     for(i in 1:U){
@@ -50,20 +58,25 @@ gradesc2 <- function(f = 10,
     q <- q + lrate*grad_q
     
   # aotomatically change learning rate to avoid diverge
-    
+
     #print the values of training and testing RMSE every 10 epochs
-    if (l %% 10 == 0){
-      est <- t(q) %*% p
+    if (l %% print_every == 0){
+    est <- t(q) %*% p
     rownames(est) <- levels(as.factor(data$movieId))
     train_RMSE_cur <- RMSE(train,est)
     test_RMSE_cur <- RMSE(test, est)
+    t_cur <- difftime(Sys.time(), t1, units='mins')
+    
     train_RMSE <- c(train_RMSE, train_RMSE_cur)
     test_RMSE <- c(test_RMSE, test_RMSE_cur)
+    epoch_dur <- c(epoch_dur, t_cur)
       cat("epochs:", l, "\t")
       cat("training RMSE:", train_RMSE_cur, "\t")
       cat("test RMSE:",test_RMSE_cur, "\n")
+      cat("epoch duration:", t_cur,"\t")
     }
   }
-  
+  t_total = difftime(Sys.time(), t0, units='mins')
+  print(paste("Training is completed. This process took" ,t_total, "minutes to complete") )
   return(list(p = p, q = q, train_RMSE=train_RMSE, test_RMSE=test_RMSE))
 }
