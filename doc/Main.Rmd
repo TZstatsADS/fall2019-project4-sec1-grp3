@@ -61,7 +61,7 @@ rmse %>% ggplot(aes(x = epoch, y = RMSE, col = train_test)) + geom_point() + fac
 ```{r, eval= FALSE}
 source("../lib/Matrix_Factorization.r")
 result <- gradesc(f = 10, lambda = 0.1,lrate = 0.01, max.iter = 240, stopping.deriv = 0.01,
-                   data = data, train = data_train, test = data_test)
+                   data = data, train = dat_train, test = dat_test)
 
 save(result, file = "../output/mat_fac.RData")
 ```
@@ -90,7 +90,7 @@ extract_pred_rating <- function(test_set, pred){
   return(pred_rating)
 }
 #extract predicted rating
-pred_test_rating <- apply(data_test, 1, extract_pred_rating, svd_krr_pred_rating)
+pred_test_rating <- apply(dat_test, 1, extract_pred_rating, svd_krr_pred_rating)
 # number of rows of data test 
 
 save(svd_krr_pred_rating, file = "../output/A1_P3.RData")
@@ -184,7 +184,7 @@ extract_pred_rating <- function(test_set, pred){
   return(pred_rating)
 }
 #extract predicted rating
-pred_test_rating <- apply(data_test, 1, extract_pred_rating, svd_krr_pred_rating)
+pred_test_rating <- apply(dat_test, 1, extract_pred_rating, svd_krr_pred_rating)
 # number of rows of data test 
 
 save(svd_krr_pred_rating, file = "../output/A2_P3.RData")
