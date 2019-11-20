@@ -29,7 +29,7 @@ Term: Fall 2019
 
 Implementation of A1 algorithm: Everyone
 
-Implementation of A2 algorithm: Luyue Chen
+Implementation of A2 algorithm: Luyue Chen, Adam Kravitz, Syed Ahsan Bukhari 
 
 Implementation of P3 algorithm: Sung In Cho, Xiaotong Li
 
@@ -37,7 +37,7 @@ Tuning parameters for A1, A2, P3: Luyue Chen, Xiaotong Li, Sung In Cho, Syed Ahs
 
 Evaluating A1 + P3 and A2 + P3: Xiaotong Li, Sung In Cho
 
-Preparing Slides for presentation: Syed Ahsan Bukhari, Xiaotong Li, Luyue Chen, Sung In Cho 
+Preparing Slides for presentation: Syed Ahsan Bukhari, Xiaotong Li, Luyue Chen, Sung In Cho, Adam Kravitz
 
 Presentation: Syed Ahsan Bukhari
 
