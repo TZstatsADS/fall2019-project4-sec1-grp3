@@ -22,7 +22,8 @@ Term: Fall 2019
 	
 + Project summary: In our project, we implemented algorithm A1, A2, P3, and used cross validation method to do parameter selection in A1 and A2. Finally, by combining A1 + P3 and A2 + P3, we further improve the performance on test dataset, and compare each algorithm w.r.t the RMSE, running time.
 
-![](Documents/A1+P3.png)
+<img src="figs/A1+P3.png" alt="evaluation results" width="500"/>
+<img src="figs/A2+P3.png" alt="evaluation results" width="500"/>
 
 **Contribution statement**: . 
 
