@@ -25,7 +25,23 @@ Term: Fall 2019
 <img src="figs/A1+P3.png" alt="evaluation results" width="500"/>
 <img src="figs/A2+P3.png" alt="evaluation results" width="500"/>
 
-**Contribution statement**: . 
+**Contribution statement**: 
+
+Implementation of A1 algorithm: 
+
+Implementation of A2 algorithm: Luyue Chen
+
+Implementation of P3 algorithm: Sung In Cho, Xiaotong Li
+
+Tuning parameters for A1 and A2:  Luyue Chen, Xiaotong Li, Syed Ahsan Bukhari, Adam Kravitz,
+
+Evaluating A1 + P3 and A2 + P3: Xiaotong Li, Sung In Cho
+
+Preparing Slides for presentation: Syed Ahsan Bukhari, Xiaotong Li, Luyue Chen, Sung In Cho 
+
+Presentation: Syed Ahsan Bukhari
+
+
 
 Following [suggestions](http://nicercode.github.io/blog/2013-04-05-projects/) by [RICH FITZJOHN](http://nicercode.github.io/about/#Team) (@richfitz). This folder is orgarnized as follows.
 
